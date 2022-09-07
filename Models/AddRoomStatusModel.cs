@@ -3,11 +3,11 @@ using MeetingRoom.Models.Domain;
 
 namespace MeetingRoom.Models
 {
-    public class AddRoomStatusModel : IEnumerable
+    public class AddRoomStatusModel 
     {
         public Guid Id { get; set; }
 
-        public string? RoomId { get; set; }
+        public string RoomId { get; set; }
         public string? RoomName { get; set; }
         public string? ImageUrl { get; set; }
 
@@ -19,9 +19,6 @@ namespace MeetingRoom.Models
 
         public string? BookedBy { get; set; }
 
-        public IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
