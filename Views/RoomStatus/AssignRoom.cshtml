@@ -1,0 +1,42 @@
+﻿@model List<MeetingRoom.Models.AddRoomStatusModel>
+
+<header class="masthead" style="background-image: url('/img/header-bg.jpg');">
+
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in"><span>Welcome</span></div>
+            <div class="intro-heading text-uppercase"><span>View Room<br></span></div>
+        </div>
+    </div>
+</header>
+
+<h1></h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>ImageUrl</th>
+        <th>Discription</th>
+
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var room in Model)
+    {
+        <tr>
+            <td>@room.RoomId</td>
+            <td>@room.RoomName</td>
+            <td>@room.BookedDateTime</td>
+            <td>@room.BookedFromDateTime</td>
+            <td>@room.BookedToDateTime</td>
+            <td>@room.BookedBy</td>
+            <td>@room.RoomStatus</td>
+            <td><a href="/RoomDetails/EditRoom/@room.Id">Approve</a></td>
+            <td><a href="/RoomDetails/EditRoom/@room.Id">Deny</a></td>
+        </tr>
+    }
+    </tbody>
+</table>

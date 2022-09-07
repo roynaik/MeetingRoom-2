@@ -1,0 +1,40 @@
+﻿@model AddRoomStatusModel
+
+
+<section class="bg-light" id="portfolio">
+    <h1 style="text-align: center;">Room Name : @Model.RoomName </h1>
+    <section class="bg-light" id="team">
+        <section class="position-relative py-4 py-xl-5" style="margin-top: -77px;">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col">
+                        <picture><img src="@Model.ImageUrl" style="padding-right: 0px;width: 500px;height: 459px;"></picture>
+                    </div>
+                    <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4" style="padding-left: 19px;margin-left: 98px;">
+                        <div class="card mb-5">
+                            <div class="card-body p-sm-5" style="margin-bottom: 56px;padding-bottom: 71px;">
+                                <form method="post" asp-action="BookRoom">
+                                    <input hidden asp-for="RoomId"/>
+                                    <div class="mb-3"><input class="form-control" type="text" id="name-2" placeholder="Users Name" asp-for="BookedBy" required=""></div>
+                                    
+                                    <label class="form-label">Booking Date</label>
+                                    <input class="form-control" asp-for="BookedDateTime" type="date">
+                                    
+                                    <label class="form-label">Select Start Time And End time</label>
+                                    <div style="margin-bottom: 14px;">
+                                        <input class="form-control mb-2 d-inline" id="myTime" type="time" asp-for="BookedFromDateTime" onchange="onTimeChange()">
+                                        <label class="form-label" style="text-align: center;">To</label>
+                                        <input class="form-control mb-2 d-inline" id="myTime-1" type="time" asp-for="BookedToDateTime" onchange="onTimeChange()" style="margin-top: 6px;">
+                                    </div>
+                                    <div class="mb-3"></div>
+                                    <div class="mb-3"></div>
+                                    <div><button class="btn btn-primary d-block w-100" type="submit">Send </button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</section>

@@ -1,0 +1,39 @@
+﻿@model List<MeetingRoom.Models.Domain.RoomDetailsDB>
+
+<header class="masthead" style="background-image: url('/img/header-bg.jpg');">
+
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in"><span>Welcome</span></div>
+            <div class="intro-heading text-uppercase"><span>View Room<br></span></div>
+        </div>
+    </div>
+</header>
+
+<h1>Rooms Available</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>ImageUrl</th>
+            <th>Discription</th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var room in Model)
+        {
+            <tr>
+                <td>@room.Id</td>
+                <td>@room.RoomName</td>
+                <td>@room.Location</td>
+                <td><img src="@room.ImageUrl" style="width: 100px; height: 100px" /> </td>
+                <td>@room.Discription</td>
+                <td><a href="/RoomDetails/EditRoom/@room.Id">Edit</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,35 @@
+﻿   @model AddMeetingRoomModel
+
+   
+   <header class="masthead" style="background-image: url('/img/header-bg.jpg');">
+    
+       <div class="container">
+           <div class="intro-text">
+               <div class="intro-lead-in"><span>Welcome</span></div>
+               <div class="intro-heading text-uppercase"><span>Add Room<br></span></div>
+           </div>
+       </div>
+   </header>
+
+   <section class="position-relative py-4 py-xl-5" style="margin-top: 100px;">
+        <div class="container position-relative">
+            <div class="row d-flex justify-content-center">
+                <div class="col">
+                    <picture><img style="padding-right: 0px;width: 500px;height: 459px;"></picture>
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4" style="padding-left: 19px;padding-top: 20px;margin-left: 98px;">
+                    <div class="card mb-5">
+                        <div class="card-body p-sm-5">
+                        <form method="post" asp-action="AddRooms">
+                                <div class="mb-3"><input asp-for="RoomName" class="form-control" type="text" id="name-2" placeholder="Meeting Room Name" required=""></div>
+                            <div class="mb-3"><input asp-for ="Location" class="form-control" type="text" id="email-2"  placeholder="Address" required=""></div>
+                            <input class="form-control" asp-for="ImageUrl" type="file" required="">
+                                <div class="mb-3"><textarea asp-for="Discription" class="form-control" id="message-2"  rows="6" placeholder="Room Discription" style="margin-top: 10px;padding-top: 15px;" required=""></textarea></div>
+                                <div><button class="btn btn-primary d-block w-100" type="submit">Send </button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

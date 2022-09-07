@@ -1,0 +1,62 @@
+﻿@using MeetingRoom.Models.Domain
+@model List<MeetingRoom.Models.Domain.RoomDetailsDB>
+
+
+<header class="masthead" style="background-image: url('/img/header-bg.jpg');">
+
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in"><span>Welcome</span></div>
+            <div class="intro-heading text-uppercase"><span>It's Nice To Meet You<br>Scroll Down TO&nbsp;<br>Book a Room<br></span></div>
+        </div>
+    </div>
+</header>
+<section class="bg-light" id="portfolio">
+    <h1 class="text-center">Book a Meeting</h1>
+
+    @foreach (var room in Model)
+    {
+        <div class="container py-4 py-xl-5">
+            <div class="row gy-4 gy-md-0">
+                <div class="col-md-6">
+                    <div class="p-xl-5 m-xl-5"><img class="rounded img-fluid w-100 fit-cover" style="min-height: 300px;" src="@room.ImageUrl"></div>
+                </div>
+                <div class="col-md-6 d-md-flex align-items-md-center">
+                    <div style="max-width: 350px;margin-bottom: 0px;padding-bottom: 0px;">
+                        <h2 class="text-uppercase fw-bold">@room.RoomName</h2>
+                        <h4 class="text-uppercase fw-bold" style="color: var(--bs-pink);">@room.Location</h4>
+                        <h4 class="text-uppercase fw-bold" style="color: var(--bs-pink);">Status</h4>
+                        <p class="my-3">@room.Discription</p>
+                        <a class="btn btn-primary btn-lg me-2" role="button" href="/RoomStatus/BookRoom/@room.Id">Book This Room</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+
+</section>
+<div class="modal fade text-center portfolio-modal" role="dialog" tabindex="-1" id="portfolioModal1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="modal-body">
+                            <h2 class="text-uppercase">Project Name</h2>
+                            <p class="text-muted item-intro">Lorem ipsum dolor sit amet consectetur.</p><img class="img-fluid d-block mx-auto" src="assets/img/portfolio/1-full.jpg">
+                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                            <ul class="list-unstyled">
+                                <li>Date: January 2017</li>
+                                <li>Client: Threads</li>
+                                <li>Category: Illustration</li>
+                            </ul><button class="btn btn-primary" type="button" data-bs-dismiss="modal"><i class="fa fa-times"></i><span>&nbsp;Close Project</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
