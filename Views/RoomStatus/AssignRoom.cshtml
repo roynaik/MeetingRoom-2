@@ -1,12 +1,11 @@
-﻿
-@model AddRoomStatusModel
+﻿@model List<AddRoomStatusModel>
 
 <header class="masthead" style="background-image: url('/img/header-bg.jpg');">
 
     <div class="container">
         <div class="intro-text">
             <div class="intro-lead-in"><span>Welcome</span></div>
-            <div class="intro-heading text-uppercase"><span>View Room<br></span></div>
+            <div class="intro-heading text-uppercase"><span>Assign Room<br></span></div>
         </div>
     </div>
 </header>
@@ -14,33 +13,32 @@
 <h1></h1>
 <table class="table">
     <thead>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Booked on</th>
-        <th>Booked from</th>
-        <th>Booked To</th>
-        <th>Booked by</th>
-        <th>Status</th>
+        <tr>
+            <th>Name</th>
+            <th>Booked on</th>
+            <th>Booked from</th>
+            <th>Booked To</th>
+            <th>Booked by</th>
+            <th>Status</th>
 
-        <th></th>
-        <th></th>
-    </tr>
+            <th></th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var room in Model)
-    {
-        <tr>
-            <td>@room.RoomId</td>
-            <td>@room.RoomName</td>
-            <td>@room.BookedDateTime</td>
-            <td>@room.BookedFromDateTime</td>
-            <td>@room.BookedToDateTime</td>
-            <td>@room.BookedBy</td>
-            <td>@room.RoomStatus</td>
+        @foreach (var room in Model)
+        {
+            <tr>
+                <td>@room.RoomId</td>
+                <td>@room.RoomName</td>
+                <td>@room.BookedDateTime</td>
+                <td>@room.BookedFromDateTime</td>
+                <td>@room.BookedToDateTime</td>
+                <td>@room.BookedBy</td>
+                <td>@room.RoomStatus</td>
                 <td><a href="/RoomStatus/RoomStatusApprove/@room.Id">Approve</a></td>
                 <td><a href="/RoomStatus/RoomStatusDeny/@room.Id">Deny</a></td>
-        </tr>
-    }
+            </tr>
+        }
     </tbody>
 </table>

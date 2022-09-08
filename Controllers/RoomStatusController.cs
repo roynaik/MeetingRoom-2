@@ -78,8 +78,8 @@ namespace MeetingRoom.Controllers
                 viewModel.BookedToDateTime = status.BookedToDateTime;
             }
             
-
-            return View(viewModel);
+         //   return View(viewModel);
+            return View( new List<AddRoomStatusModel> { viewModel });
 
         }
 
