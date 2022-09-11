@@ -13,5 +13,6 @@ namespace MeetingRoom.Models.Data
         public DbSet<RoomDetailsDB> RoomDetailsDB { get; set; }
         public DbSet<RoomStatusDb> RoomStatusDB { get; set; }
         public DbSet<UsersDb> UsersDb { get; set; }
+        public DbSet<ReportDetailsDb> ReportDetailsDb { get; set; }
     }
 }

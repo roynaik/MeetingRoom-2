@@ -54,6 +54,7 @@ namespace MeetingRoom.Controllers
 
                 await meetingRoomDbContext.RoomStatusDB.AddAsync(meetingRoom);
                 await meetingRoomDbContext.SaveChangesAsync();
+                await AddToReport(model.Id, room.RoomName, Status.Pending, model.BookedBy, model.BookedDateTime, model.BookedFromDateTime, model.BookedToDateTime);
 
             }
             return RedirectToAction("Index", "RoomDetails");
@@ -66,11 +67,16 @@ namespace MeetingRoom.Controllers
             var roomStatus = await meetingRoomDbContext.RoomStatusDB.Where(x => x.RoomStatus == Status.Pending).ToListAsync();
 
             var rooms = await meetingRoomDbContext.RoomDetailsDB.ToListAsync();
-            var viewModel = new AddRoomStatusModel();
-            if (roomStatus != null || roomStatus.Count==0)
+            var model = new List<AddRoomStatusModel>();
+
+            if (roomStatus != null || roomStatus.Count == 0)
             {
+
+
                 foreach (var status in roomStatus)
                 {
+                    var viewModel = new AddRoomStatusModel();
+
                     viewModel.RoomId = status.RoomId;
                     viewModel.ImageUrl = rooms.FirstOrDefault(x => x.Id.ToString() == status.RoomId)?.ImageUrl;
                     viewModel.RoomName = rooms.FirstOrDefault(x => x.Id.ToString() == status.RoomId)?.RoomName;
@@ -79,19 +85,20 @@ namespace MeetingRoom.Controllers
                     viewModel.BookedDateTime = status.BookedDateTime;
                     viewModel.BookedFromDateTime = status.BookedFromDateTime;
                     viewModel.BookedToDateTime = status.BookedToDateTime;
-                }
 
+                    model.Add(viewModel);
+                }
             }
 
 
 
 
             //   return View(viewModel);
-            return View(new List<AddRoomStatusModel> { viewModel });
+            return View(model);
 
         }
 
-        //   [HttpPost]
+
         public async Task<IActionResult> RoomStatusApprove(Guid id)
         {
             var status = await meetingRoomDbContext.RoomStatusDB.FirstOrDefaultAsync(x => x.RoomId == id.ToString());
@@ -107,6 +114,7 @@ namespace MeetingRoom.Controllers
                 status.BookedToDateTime = status.BookedToDateTime;
 
                 await meetingRoomDbContext.SaveChangesAsync();
+                await AddToReport(id, room.RoomName, Status.Booked, status.BookedBy, status.BookedDateTime, status.BookedFromDateTime, status.BookedToDateTime);
 
 
             }
@@ -132,6 +140,34 @@ namespace MeetingRoom.Controllers
                 };
 
                 await meetingRoomDbContext.RoomStatusDB.AddAsync(meetingRoom);
+                await meetingRoomDbContext.SaveChangesAsync();
+                await AddToReport(id, room.RoomName, Status.Booked, status.BookedBy, status.BookedDateTime, status.BookedFromDateTime, status.BookedToDateTime);
+            }
+            return RedirectToAction("Index", "RoomDetails");
+
+        }
+
+
+
+        public async Task<IActionResult> AddToReport(Guid id, string roomName, Status status, string bookedBy, DateTime bookedDateTime, DateTime bookedFromDateTime, DateTime bookedToDateTime)
+        {
+            var report = await meetingRoomDbContext.ReportDetailsDb.ToListAsync();
+
+            if (report != null)
+            {
+                //  room.MeetingRoomName = model.MeetingRoomName;
+                var reports = new ReportDetailsDb()
+                {
+                    RoomId = id.ToString(),
+                    RoomName = roomName,
+                    RoomStatus = status,
+                    BookedBy = bookedBy,
+                    BookedDateTime = bookedDateTime,
+                    BookedFromDateTime = bookedFromDateTime,
+                    BookedToDateTime = bookedToDateTime
+                };
+
+                await meetingRoomDbContext.ReportDetailsDb.AddAsync(reports);
                 await meetingRoomDbContext.SaveChangesAsync();
 
             }
