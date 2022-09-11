@@ -175,6 +175,21 @@ namespace MeetingRoom.Controllers
 
         }
 
+
+        public async Task<IActionResult> ViewReport()
+        {
+            var report = await meetingRoomDbContext.ReportDetailsDb.ToListAsync();
+            return View(report);
+        }
+        
+        public async Task<IActionResult> SortData(string val)
+        {
+            var report = await meetingRoomDbContext.ReportDetailsDb.ToListAsync();
+
+            return RedirectToAction("ViewReport", "RoomStatus",report);
+        }
+
+
     }
 
 
