@@ -64,27 +64,34 @@ namespace MeetingRoom.Controllers
         public async Task<IActionResult> AssignRoom()
         {
             var roomStatus = await meetingRoomDbContext.RoomStatusDB.Where(x => x.RoomStatus == Status.Pending).ToListAsync();
+
             var rooms = await meetingRoomDbContext.RoomDetailsDB.ToListAsync();
             var viewModel = new AddRoomStatusModel();
-
-
-            foreach (var status in roomStatus)
+            if (roomStatus != null || roomStatus.Count==0)
             {
-                viewModel.RoomId = status.RoomId;
-                viewModel.ImageUrl = rooms.FirstOrDefault(x => x.Id.ToString() == status.RoomId)?.ImageUrl;
-                viewModel.RoomName = rooms.FirstOrDefault(x => x.Id.ToString() == status.RoomId)?.RoomName;
-                viewModel.BookedBy = status.BookedBy;
-                viewModel.BookedDateTime = status.BookedDateTime;
-                viewModel.BookedFromDateTime = status.BookedFromDateTime;
-                viewModel.BookedToDateTime = status.BookedToDateTime;
+                foreach (var status in roomStatus)
+                {
+                    viewModel.RoomId = status.RoomId;
+                    viewModel.ImageUrl = rooms.FirstOrDefault(x => x.Id.ToString() == status.RoomId)?.ImageUrl;
+                    viewModel.RoomName = rooms.FirstOrDefault(x => x.Id.ToString() == status.RoomId)?.RoomName;
+
+                    viewModel.BookedBy = status.BookedBy;
+                    viewModel.BookedDateTime = status.BookedDateTime;
+                    viewModel.BookedFromDateTime = status.BookedFromDateTime;
+                    viewModel.BookedToDateTime = status.BookedToDateTime;
+                }
+
             }
+
+
+
 
             //   return View(viewModel);
             return View(new List<AddRoomStatusModel> { viewModel });
 
         }
 
-     //   [HttpPost]
+        //   [HttpPost]
         public async Task<IActionResult> RoomStatusApprove(Guid id)
         {
             var status = await meetingRoomDbContext.RoomStatusDB.FirstOrDefaultAsync(x => x.RoomId == id.ToString());
@@ -92,24 +99,22 @@ namespace MeetingRoom.Controllers
             if (room != null)
             {
                 //  room.MeetingRoomName = model.MeetingRoomName;
-                var meetingRoom = new RoomStatusDb()
-                {
-                    RoomId = id.ToString(),
-                    RoomStatus = Status.Booked,
-                    BookedBy = status.BookedBy,
-                    BookedFromDateTime = status.BookedFromDateTime,
-                    BookedToDateTime = status.BookedToDateTime
-                };
 
-                await meetingRoomDbContext.RoomStatusDB.AddAsync(meetingRoom);
+                status.RoomId = id.ToString();
+                status.RoomStatus = Status.Booked;
+                status.BookedBy = status.BookedBy;
+                status.BookedFromDateTime = status.BookedFromDateTime;
+                status.BookedToDateTime = status.BookedToDateTime;
+
                 await meetingRoomDbContext.SaveChangesAsync();
+
 
             }
             return RedirectToAction("Index", "RoomDetails");
 
         }
 
-   //     [HttpPost]
+        //     [HttpPost]
         public async Task<IActionResult> RoomStatusDeny(Guid id)
         {
             var status = await meetingRoomDbContext.RoomStatusDB.FirstOrDefaultAsync(x => x.RoomId == id.ToString());

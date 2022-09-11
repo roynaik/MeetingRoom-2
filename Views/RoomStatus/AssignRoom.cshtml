@@ -10,34 +10,56 @@
     </div>
 </header>
 
-<h1></h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Booked on</th>
-            <th>Booked from</th>
-            <th>Booked To</th>
-            <th>Booked by</th>
-            <th>Status</th>
 
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var room in Model)
-        {
-            <tr>
-                <td>@room.RoomName</td>
-                <td>@room.BookedDateTime</td>
-                <td>@room.BookedFromDateTime</td>
-                <td>@room.BookedToDateTime</td>
-                <td>@room.BookedBy</td>
-                <td>@room.RoomStatus</td>
-                <td><a href="/RoomStatus/RoomStatusApprove/@room.RoomId">Approve</a></td>
-                <td><a href="/RoomStatus/RoomStatusDeny/@room.RoomId">Deny</a></td>
-            </tr>
+<section class="bg-light" id="portfolio">
+
+
+    <div class="container py-4 py-xl-5">
+        @if (@Model.Count != 0)
+        {    <h1 class="text-center">Assign Meeting Rooms</h1>
+
+            <h1></h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Booked on</th>
+                        <th>Booked from</th>
+                        <th>Booked To</th>
+                        <th>Booked by</th>
+                        <th>Status</th>
+
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var room in Model)
+                    {
+                        <tr>
+                            <td>@room.RoomName</td>
+                            <td>@room.BookedDateTime</td>
+                            <td>@room.BookedFromDateTime</td>
+                            <td>@room.BookedToDateTime</td>
+                            <td>@room.BookedBy</td>
+                            <td>@room.RoomStatus</td>
+                            <td><a href="/RoomStatus/RoomStatusApprove/@room.RoomId">Approve</a></td>
+                            <td><a href="/RoomStatus/RoomStatusDeny/@room.RoomId">Deny</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
-    </tbody>
-</table>
+        else
+        {
+            <h1>No Data To Display</h1>
+        };
+
+    </div>
+
+
+
+
+
+</section>
+
