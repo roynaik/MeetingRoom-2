@@ -15,7 +15,7 @@
     <div class="container position-relative">
         <div class="row d-flex justify-content-center">
             <div class="col">
-                <picture><img style="padding-right: 0px;width: 500px;height: 459px;"></picture>
+                <picture><img src="@Model.ImageUrl" id="displayImage" style="padding-right: 0px; width: 500px;height: 459px;"></picture>
             </div>
             <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-4" style="padding-left: 19px;padding-top: 20px;margin-left: 98px;">
                 <div class="card mb-5">
@@ -23,8 +23,11 @@
                         <form method="post" asp-action="EditRoom">
                             <div class="mb-3"><input asp-for="RoomName" class="form-control" type="text" id="name-2" placeholder="Meeting Room Name" required=""></div>
                             <div class="mb-3"><input asp-for ="Location" class="form-control" type="text" id="email-2"  placeholder="Address" required=""></div>
-                            <input class="form-control" asp-for="ImageUrl" type="file" required="">
-                            <div class="mb-3"><textarea asp-for="Discription" class="form-control" id="message-2"  rows="6" placeholder="Room Discription" style="margin-top: 10px;padding-top: 15px;" required=""></textarea></div>
+
+                            <input type="file" name="file" id="file" onchange="convertImgtoBase64(this)">
+                            <input class="form-control" id="imageUrl" asp-for="ImageUrl" hidden>
+
+                            <div class="mb-3"><textarea asp-for="Discription" class="form-control" id="message-2" rows="6" placeholder="Room Discription" style="margin-top: 10px;padding-top: 15px;" required=""></textarea></div>
                             <div><button class="btn btn-primary d-block w-100" type="submit">Send </button></div>
                             <div style="padding-top: 10px;"><button asp-action="DeleteRoom" class="btn btn-primary d-block w-100" type="Button">Delete </button></div>
                         </form>
@@ -34,3 +37,26 @@
         </div>
     </div>
 </section>
+
+                            
+<script type="text/javascript"> 
+
+   function convertImgtoBase64(element) { 
+       debugger;
+      var file = element.files[0]; 
+
+      var reader = new FileReader(); 
+
+      reader.onloadend = function() {
+
+            $("#imageUrl").attr("href", reader.result);
+
+            $("#imageUrl").val(reader.result);
+            $("#displayImage").attr("src", reader.result);
+        } 
+
+      reader.readAsDataURL(file); 
+
+    } 
+
+</script> 

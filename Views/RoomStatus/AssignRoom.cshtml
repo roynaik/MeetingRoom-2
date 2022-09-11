@@ -29,15 +29,14 @@
         @foreach (var room in Model)
         {
             <tr>
-                <td>@room.RoomId</td>
                 <td>@room.RoomName</td>
                 <td>@room.BookedDateTime</td>
                 <td>@room.BookedFromDateTime</td>
                 <td>@room.BookedToDateTime</td>
                 <td>@room.BookedBy</td>
                 <td>@room.RoomStatus</td>
-                <td><a href="/RoomStatus/RoomStatusApprove/@room.Id">Approve</a></td>
-                <td><a href="/RoomStatus/RoomStatusDeny/@room.Id">Deny</a></td>
+                <td><a href="/RoomStatus/RoomStatusApprove/@room.RoomId">Approve</a></td>
+                <td><a href="/RoomStatus/RoomStatusDeny/@room.RoomId">Deny</a></td>
             </tr>
         }
     </tbody>
