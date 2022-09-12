@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+
+<section>
+
+<h3>Success Page</h3>
+Welcome @Context.Session.GetString("username")
+<br>
+<a asp-controller="account" asp-action="logout">Logout</a>
+
+</section>

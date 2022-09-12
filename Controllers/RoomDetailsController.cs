@@ -1,6 +1,7 @@
 ﻿using MeetingRoom.Models;
 using MeetingRoom.Models.Data;
 using MeetingRoom.Models.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
